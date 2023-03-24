@@ -11,7 +11,7 @@ export default function MainScreen() {
       <View>
         <FlatList
           accessible={true}
-          data={[]}
+          data={[1,23,3]}
           renderItem={({ item }) => <MainItem />}
         />
       </View>
