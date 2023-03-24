@@ -35,7 +35,7 @@ export default function MainScreen() {
     </View>
   );
 }
-
+//test
 const styles = StyleSheet.create({
   container: {
     flex: 1,
