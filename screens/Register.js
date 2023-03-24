@@ -20,56 +20,48 @@ import { View } from "react-native";
 import AppBar from "../components/AppBar";
 import { StyleSheet } from "react-native";
 
-const Login = (props) => {
+const Register = (props) => {
   return (
     <View style={styles.main}>
       <Center w="100%">
         <AppBar navigation={props.navigation} />
-        <Box safeArea p="2" py="8" w="90%" maxW="290">
+        <Box safeArea p="2" w="90%" maxW="290" py="8">
           <Heading
             size="lg"
-            fontWeight="600"
             color="coolGray.800"
             _dark={{
               color: "warmGray.50",
             }}
+            fontWeight="semibold"
           >
             Welcome
           </Heading>
           <Heading
             mt="1"
+            color="coolGray.600"
             _dark={{
               color: "warmGray.200",
             }}
-            color="coolGray.600"
             fontWeight="medium"
             size="xs"
           >
-            Sign in to continue!
+            Sign up to continue!
           </Heading>
-
           <VStack space={3} mt="5">
             <FormControl>
-              <FormControl.Label>Email ID</FormControl.Label>
+              <FormControl.Label>Email</FormControl.Label>
               <Input />
             </FormControl>
             <FormControl>
               <FormControl.Label>Password</FormControl.Label>
               <Input type="password" />
-              <Link
-                _text={{
-                  fontSize: "xs",
-                  fontWeight: "500",
-                  color: "indigo.500",
-                }}
-                alignSelf="flex-end"
-                mt="1"
-              >
-                Forget Password?
-              </Link>
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>Confirm Password</FormControl.Label>
+              <Input type="password" />
             </FormControl>
             <Button mt="2" colorScheme="indigo">
-              Sign in
+              Sign up
             </Button>
             <HStack mt="6" justifyContent="center">
               <Text
@@ -79,14 +71,14 @@ const Login = (props) => {
                   color: "warmGray.200",
                 }}
               >
-                I'm a new user.{" "}
+                Already have an account?{" "}
               </Text>
               <Pressable
                 onPress={() => {
-                  props.navigation.navigate("register");
+                  props.navigation.navigate("login");
                 }}
               >
-                <Text style={styles.text}>Sign Up</Text>
+                <Text style={styles.text}>Sign In</Text>
               </Pressable>
             </HStack>
           </VStack>
@@ -108,4 +100,4 @@ const styles = StyleSheet.create({
     color: "blue",
   },
 });
-export default Login;
+export default Register;
