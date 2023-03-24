@@ -32,20 +32,17 @@ export default function AppBar(props) {
         maxW="100%"
       >
         <HStack alignItems="center">
-          <IconButton onPress={() => {
-              props.navigation.navigate("main")
-          }} icon={<Entypo name="home" size={24} color="white" />} />
+          <IconButton
+            onPress={() => {
+              props.navigation.navigate("main");
+            }}
+            icon={<Entypo name="home" size={24} color="white" />}
+          />
           <Text color="white" fontSize="20" fontWeight="bold">
             Home
           </Text>
         </HStack>
         <HStack>
-          <IconButton
-            icon={
-              <Icon as={MaterialIcons} name="search" size="xl" color="white" />
-            }
-          />
-
           <Menu
             w="190"
             trigger={(triggerProps) => {
