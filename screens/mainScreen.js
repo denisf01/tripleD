@@ -23,9 +23,9 @@ export default function MainScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.appbar}>
-        <AppBar />
+        <AppBar navigation={props.navigation} />
       </View>
-      <View>
+      <View style={styles.list}>
         <FlatList
           accessible={true}
           data={[1, 2, 3, 5, 6, 7, 8, 9, 10]}
@@ -47,5 +47,8 @@ const styles = StyleSheet.create({
   appbar: {
     alignItems: "center",
     width: "100%",
+  },
+  list: {
+    marginBottom: 100,
   },
 });
