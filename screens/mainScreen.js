@@ -2,16 +2,16 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import { FlatList } from "native-base";
 import AppBar from "../components/AppBar";
 import { MainItem } from "../components/MainItem";
-export default function MainScreen() {
+export default function MainScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.appbar}>
-        <AppBar />
+        <AppBar navigation={props.navigation} />
       </View>
-      <View>
+      <View style={styles.list}>
         <FlatList
           accessible={true}
-          data={[1,23,3]}
+          data={[1, 23, 3]}
           renderItem={({ item }) => <MainItem />}
         />
       </View>
@@ -30,5 +30,8 @@ const styles = StyleSheet.create({
   appbar: {
     alignItems: "center",
     width: "100%",
+  },
+  list: {
+    marginBottom: 100,
   },
 });
