@@ -13,7 +13,7 @@ import {
   Pressable,
 } from "native-base";
 
-export const MainItem = () => {
+export const MainItem = (props) => {
   return (
     <Pressable
       onPress={() => {
@@ -69,7 +69,7 @@ export const MainItem = () => {
           <Stack p="4" space={3}>
             <Stack space={2}>
               <Heading size="md" ml="-1">
-                The Garden City
+                {props.title}
               </Heading>
               <Text
                 fontSize="xs"
@@ -86,11 +86,7 @@ export const MainItem = () => {
                 The Silicon Valley of India.
               </Text>
             </Stack>
-            <Text fontWeight="400">
-              Bengaluru (also called Bangalore) is the center of India's
-              high-tech industry. The city is also known for its parks and
-              nightlife.
-            </Text>
+            <Text fontWeight="400">{props.description}</Text>
             <HStack
               alignItems="center"
               space={4}
@@ -104,7 +100,7 @@ export const MainItem = () => {
                   }}
                   fontWeight="400"
                 >
-                  6 mins ago
+                  {props.user}
                 </Text>
               </HStack>
             </HStack>

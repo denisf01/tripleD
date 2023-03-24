@@ -9,8 +9,8 @@ export default function MainScreen(props) {
       title: "Title1",
       category: "Cat1",
       description:
-        "Bengaluru (also called Bangalore) is the center of India's\n" +
-        "              high-tech industry. The city is also known for its parks and\n" +
+        "Bengaluru (also called Bangalore) is the center of India's" +
+        "              high-tech industry. The city is also known for its parks and" +
         "              nightlife.",
       user: "User1",
       photo: "",
@@ -19,8 +19,8 @@ export default function MainScreen(props) {
       title: "Title2",
       category: "Cat2",
       description:
-        "Bengaluru (also called Bangalore) is the center of India's\n" +
-        "              high-tech industry. The city is also known for its parks and\n" +
+        "Bengaluru (also called Bangalore) is the center of India's" +
+        "              high-tech industry. The city is also known for its parks and" +
         "              nightlife.",
       user: "User2",
       photo: "",
@@ -29,8 +29,8 @@ export default function MainScreen(props) {
       title: "Title3",
       category: "Cat3",
       description:
-        "Bengaluru (also called Bangalore) is the ter of India's\n" +
-        "              high-tech indtry. The city is also known for its parks and\n" +
+        "Bengaluru (also called Bangalore) is the ter of India's" +
+        "              high-tech indtry. The city is also known for its parks and" +
         "              nightlife.",
       user: "User3",
       photo: "",
@@ -45,8 +45,16 @@ export default function MainScreen(props) {
       <View style={styles.list}>
         <FlatList
           accessible={true}
-          data={[1, 23, 3]}
-          renderItem={({ item }) => <MainItem />}
+          data={data}
+          renderItem={({ item }) => (
+            <MainItem
+              title={item.title}
+              category={item.category}
+              description={item.description}
+              user={item.user}
+              photo={item.photo}
+            />
+          )}
         />
       </View>
     </View>
