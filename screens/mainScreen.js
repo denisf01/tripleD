@@ -14,6 +14,7 @@ export default function MainScreen(props) {
         "              nightlife.",
       user: "User1",
       photo: "",
+      id: (Math.random() + 1).toString(36).substring(7),
     },
     {
       title: "Title2",
@@ -24,6 +25,7 @@ export default function MainScreen(props) {
         "              nightlife.",
       user: "User2",
       photo: "",
+      id: (Math.random() + 1).toString(36).substring(7),
     },
     {
       title: "Title3",
@@ -34,6 +36,7 @@ export default function MainScreen(props) {
         "              nightlife.",
       user: "User3",
       photo: "",
+      id: (Math.random() + 1).toString(36).substring(7),
     },
   ];
   return (
@@ -48,14 +51,15 @@ export default function MainScreen(props) {
           data={data}
           renderItem={({ item }) => (
             <MainItem
+              navigation={props.navigation}
               title={item.title}
               category={item.category}
               description={item.description}
               user={item.user}
               photo={item.photo}
+              id={item.id}
             />
           )}
-
         />
       </View>
     </View>
