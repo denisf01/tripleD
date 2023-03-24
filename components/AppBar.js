@@ -23,8 +23,8 @@ export default function AppBar(props) {
       <StatusBar bg="#3700B3" barStyle="light-content" />
       <Box safeAreaTop bg="violet.600" />
       <HStack
-        bg="violet.800"
-        px="2"
+        bg="#6495ed"
+        px="1"
         py="3"
         justifyContent="space-between"
         alignItems="center"

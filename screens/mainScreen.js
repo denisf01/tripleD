@@ -45,21 +45,21 @@ export default function MainScreen(props) {
       <View style={styles.list}>
         <FlatList
           accessible={true}
-          data={[1, 23, 3]}
+          data={[1, 2, 3, 5, 6, 7, 8, 9, 10]}
           renderItem={({ item }) => <MainItem />}
         />
       </View>
     </View>
   );
 }
-
+//test
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "flex-start",
-    width: "100%",
+    width: "100%", // test
   },
   appbar: {
     alignItems: "center",
