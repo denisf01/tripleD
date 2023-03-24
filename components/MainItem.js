@@ -13,8 +13,11 @@ import {
   Pressable,
 } from "native-base";
 
+
 export const MainItem = (props) => {
+
   return (
+
     <Pressable
       onPress={() => {
         console.log("test");
@@ -44,6 +47,7 @@ export const MainItem = (props) => {
               <Image
                 source={{
                   uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg",
+
                 }}
                 alt="image"
               />
@@ -83,7 +87,9 @@ export const MainItem = (props) => {
                 ml="-0.5"
                 mt="-1"
               >
+
                 The Silicon Valley of India.
+
               </Text>
             </Stack>
             <Text fontWeight="400">{props.description}</Text>

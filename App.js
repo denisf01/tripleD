@@ -10,7 +10,7 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{headerStyle : {backgroundColor: '#87ceeb'}}}>
           <Stack.Screen
             name="main"
             component={MainScreen}
