@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "flex-start",
-    width: "100%",
+    width: "100%", // test
   },
   appbar: {
     alignItems: "center",
