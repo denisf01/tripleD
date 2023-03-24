@@ -29,7 +29,7 @@ export default function MainScreen(props) {
       title: "Title3",
       category: "Cat3",
       description:
-        "Bengaluru (also called Bangalore) is the center of India's\n" +
+        "Bengaluru (also called Bangalore) is the ter of India's\n" +
         "              high-tech indtry. The city is also known for its parks and\n" +
         "              nightlife.",
       user: "User3",
