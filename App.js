@@ -8,11 +8,11 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{headerStyle : {backgroundColor: '#87ceeb'}}}>
           <Stack.Screen
             name="main"
             component={MainScreen}
-            options={{ title: "3D" }}
+            options={{ title: "3D Shop" , navigationBarHidden: true, headerShown: false}}
           />
         </Stack.Navigator>
       </NavigationContainer>

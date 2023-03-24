@@ -7,22 +7,22 @@ export default function AppBar() {
       <StatusBar bg="#3700B3" barStyle="light-content" />
       <Box safeAreaTop bg="violet.600" />
       <HStack
-        bg="violet.800"
+        bg="#6495ed"
         px="1"
         py="3"
         justifyContent="space-between"
         alignItems="center"
         w="100%"
-        maxW="360"
+        maxW="100%"
       >
-        <HStack alignItems="center">
+        <HStack alignItems="center" space = {20}>
           <IconButton
             icon={
               <Icon size="sm" as={MaterialIcons} name="menu" color="white" />
             }
           />
-          <Text color="white" fontSize="20" fontWeight="bold">
-            Home
+          <Text color="white" fontSize="30" fontWeight="bold">
+            3D Shop
           </Text>
         </HStack>
         <HStack>

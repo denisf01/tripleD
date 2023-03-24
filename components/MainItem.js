@@ -13,6 +13,9 @@ import {
 } from "native-base";
 
 export const MainItem = () => {
+  var mainTitle = "Artikal"
+  var secondTitle = "Vrsta"
+  var korisnik = "Dino"
   return (
     <Box alignItems="center">
       <Box
@@ -37,18 +40,18 @@ export const MainItem = () => {
           <AspectRatio w="100%" ratio={16 / 9}>
             <Image
               source={{
-                uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg",
+                uri: "https://www.bmwgroup.com/content/dam/grpw/websites/bmwgroup_com/brands/bmw_i/2023/230201_BMW_Group_BMW_i4eDrive40.png",
               }}
               alt="image"
             />
           </AspectRatio>
           <Center
-            bg="violet.500"
+            bg="#6495ed"
             _dark={{
-              bg: "violet.400",
+              bg: "#6495ed",
             }}
             _text={{
-              color: "warmGray.50",
+              color: "#000000",
               fontWeight: "700",
               fontSize: "xs",
             }}
@@ -63,21 +66,21 @@ export const MainItem = () => {
         <Stack p="4" space={3}>
           <Stack space={2}>
             <Heading size="md" ml="-1">
-              The Garden City
+              {mainTitle}
             </Heading>
             <Text
               fontSize="xs"
               _light={{
-                color: "violet.500",
+                color: "#ff0000",
               }}
               _dark={{
-                color: "violet.400",
+                color: "#ff0000",
               }}
               fontWeight="500"
               ml="-0.5"
               mt="-1"
             >
-              The Silicon Valley of India.
+              {secondTitle}
             </Text>
           </Stack>
           <Text fontWeight="400">
@@ -85,7 +88,7 @@ export const MainItem = () => {
             industry. The city is also known for its parks and nightlife.
           </Text>
           <HStack alignItems="center" space={4} justifyContent="space-between">
-            <HStack alignItems="center">
+            <HStack alignItems="center" spacing= {150}>
               <Text
                 color="coolGray.600"
                 _dark={{
@@ -93,7 +96,7 @@ export const MainItem = () => {
                 }}
                 fontWeight="400"
               >
-                6 mins ago
+               Seller: {korisnik}   
               </Text>
             </HStack>
           </HStack>
