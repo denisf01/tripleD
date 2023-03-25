@@ -17,7 +17,13 @@ export const MainItem = (props) => {
   return (
     <Pressable
       onPress={() => {
-        props.navigation.navigate("itemDetails", {id: props.id});
+        props.navigation.navigate("itemDetails", {
+          category: props.category,
+          description: props.description,
+          id: props.id,
+          user: props.user,
+          price: props.price,
+        });
       }}
     >
       <Box alignItems="center" padding={2}>
@@ -42,9 +48,9 @@ export const MainItem = (props) => {
           <Box>
             <AspectRatio w="100%" ratio={16 / 9}>
               <Image
-                source={{
-                  uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg",
-                }}
+                width={"100%"}
+                height={"100%"}
+                source={{uri: props.photo[0]}}
                 alt="image"
               />
             </AspectRatio>
@@ -63,7 +69,7 @@ export const MainItem = (props) => {
               px="3"
               py="1.5"
             >
-              PHOTOS
+              More Info
             </Center>
           </Box>
           <Stack p="4" space={3}>

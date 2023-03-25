@@ -13,7 +13,7 @@ import {
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-export default function SearchBar() {
+export default function SearchBar(props) {
   return (
     <VStack
       my="4"
@@ -28,6 +28,7 @@ export default function SearchBar() {
     >
       <HStack w="80%" space={1} alignSelf="center">
         <Input
+          onChangeText={props.onChangesText}
           placeholder="Search"
           variant="filled"
           width="100%"
