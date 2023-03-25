@@ -7,7 +7,7 @@ import {
   Icon,
   Menu,
   Divider,
-    Image
+  Image,
 } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
@@ -16,9 +16,11 @@ import { Pressable } from "native-base";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { HamburgerIcon } from "native-base";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { useContext } from "react";
+import Context from "../context";
 
 export default function AppBar(props) {
-  let isLoggedIn = false;
+  const ctx = useContext(Context);
   return (
     <>
       <StatusBar bg="#3700B3" barStyle="light-content" />
@@ -39,7 +41,11 @@ export default function AppBar(props) {
             }}
             icon={<Entypo name="home" size={24} color="white" />}
           />
-          <Image size={"sm"} source={require("../images/3dlogo.png") } />
+          <Image
+            alt={"Logo"}
+            size={"sm"}
+            source={require("../images/3dlogo.png")}
+          />
         </HStack>
         <HStack>
           <Menu
@@ -53,7 +59,7 @@ export default function AppBar(props) {
               );
             }}
           >
-            {!isLoggedIn ? (
+            {!ctx.isLoggedIn ? (
               <Menu.Item
                 onPress={() => {
                   props.navigation.navigate("login", {});

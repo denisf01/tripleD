@@ -19,8 +19,74 @@ import {
 import { View } from "react-native";
 import AppBar from "../components/AppBar";
 import { StyleSheet } from "react-native";
+import { useContext, useState } from "react";
+import { validateEmail } from "../constants/functions";
+import axios from "axios";
+import { signIn_url, signUp_url, users_url } from "../constants/constants";
+import Context from "../context";
 
 const Login = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState({
+    email: false,
+    password: false,
+    fb: false,
+  });
+  const ctx = useContext(Context);
+
+  const submitHandler = () => {
+    if (!validateEmail(email)) {
+      setError((prevState) => {
+        let newState = { ...prevState };
+        newState.email = true;
+        return newState;
+      });
+      return;
+    } else {
+      setError((prevState) => {
+        let newState = { ...prevState };
+        newState.email = false;
+        return newState;
+      });
+    }
+    if (password.length < 6) {
+      setError((prevState) => {
+        let newState = { ...prevState };
+        newState.password = true;
+        return newState;
+      });
+      return;
+    } else {
+      setError((prevState) => {
+        let newState = { ...prevState };
+        newState.password = false;
+        return newState;
+      });
+    }
+
+    axios
+      .post(signIn_url, {
+        email: email,
+        password: password,
+        returnSecureToken: true,
+      })
+      .then(function (response) {
+        setError(null);
+
+        ctx.login(response.data.idToken, response.data.localId);
+        console.log("test");
+      })
+      .catch(function (error) {
+        setError((prevState) => {
+          let newState = { ...prevState };
+          newState.fb = true;
+          return newState;
+        });
+        console.log(error);
+      });
+  };
+
   return (
     <View style={styles.main}>
       <Center w="100%">
@@ -50,14 +116,23 @@ const Login = (props) => {
 
           <VStack space={3} mt="5">
             <FormControl>
-              <FormControl.Label>Email ID</FormControl.Label>
-              <Input />
+              <FormControl.Label>Email</FormControl.Label>
+              <Input onChangeText={setEmail} />
+              {!!error && !!error.email && (
+                <Text style={styles.error}>Enter a valid email!</Text>
+              )}
             </FormControl>
             <FormControl>
               <FormControl.Label>Password</FormControl.Label>
-              <Input type="password" />
+              <Input onChangeText={setPassword} type="password" />
+              {!!error && !!error.password && (
+                <Text style={styles.error}>Enter a valid email!</Text>
+              )}
+              {!!error && !!error.fb && (
+                <Text style={styles.error}>Invalid Email or Password!</Text>
+              )}
             </FormControl>
-            <Button mt="2" colorScheme="indigo">
+            <Button onPress={submitHandler} mt="2" colorScheme="indigo">
               Sign in
             </Button>
             <HStack mt="6" justifyContent="center">
@@ -95,6 +170,9 @@ const styles = StyleSheet.create({
   text: {
     textDecorationLine: "underline",
     color: "blue",
+  },
+  error: {
+    color: "red",
   },
 });
 export default Login;
