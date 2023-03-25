@@ -10,22 +10,8 @@ import Context from "../context";
 export default function MainScreen(props) {
   const ctx = useContext(Context);
   const [search, setSearch] = useState("");
-  useEffect(() => {
-    console.log("test1");
-    if (search.length > 0) {
-      setData((prevState) => {
-        return [
-          ...prevState.filter((item) => {
 
-            return item.title.includes(search);
-          }),
-        ];
-      });
-    } else {
-      setData(ctx.items);
-    }
-  }, [search]);
-  const [data, setData] = useState(ctx.items);
+
   return (
     <View style={styles.container}>
       <View style={styles.appbar}>
@@ -35,7 +21,11 @@ export default function MainScreen(props) {
       <View style={styles.list}>
         <FlatList
           accessible={true}
-          data={data}
+          data={
+            search.length > 0
+              ? ctx.items.filter((item) => item.title.includes(search))
+              : ctx.items
+          }
           renderItem={({ item }) => (
             <MainItem
               navigation={props.navigation}
