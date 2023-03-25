@@ -160,7 +160,7 @@ export const ContextProvider = (props) => {
             price: data.price,
             title: data.title,
             user: oldItem.user,
-            userId: oldItem.id,
+            userId: oldItem.userId,
           }
         )
         .then()
