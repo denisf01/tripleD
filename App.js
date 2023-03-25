@@ -10,6 +10,7 @@ import { CardTravel } from "@mui/icons-material";
 import Cart from "./screens/Cart";
 import Payment from "./screens/Payment";
 import Profile from "./screens/Profile";
+import InputItem from "./screens/InputItem";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -53,6 +54,11 @@ export default function App() {
             <Stack.Screen
               name="profile"
               component={Profile}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="inputItem"
+              component={InputItem}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

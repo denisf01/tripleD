@@ -17,7 +17,7 @@ import {
 import { ScrollView } from "native-base";
 import Slideshow from "react-native-image-slider-show";
 import AppBar from "../components/AppBar";
-import {StyleSheet, ToastAndroid, View} from "react-native";
+import { StyleSheet, ToastAndroid, View } from "react-native";
 import { useContext } from "react";
 import Context from "../context";
 
@@ -30,11 +30,9 @@ const MainItemDetail = (props) => {
         <VStack space={1}>
           <Slideshow
             scrollEnabled={false}
-            dataSource={[
-              { url: "http://placeimg.com/640/480/any" },
-              { url: "http://placeimg.com/640/480/any" },
-              { url: "http://placeimg.com/640/480/any" },
-            ]}
+            dataSource={props.route.params.photo.map((item) => {
+              return { url: item };
+            })}
           />
           <Box alignItems="center">
             <Box
@@ -124,27 +122,28 @@ const MainItemDetail = (props) => {
               </Stack>
             </Box>
           </Box>
-
-          <Button
-            onPress={() => {
-              if (!ctx.isLoggedIn) {
-                props.navigation.navigate("login");
-              } else {
-                ctx.addToCart(
-                  props.route.params.title,
-                  props.route.params.price
-                );
-                ToastAndroid.show(
+          {!!ctx.id && ctx.id !== props.route.params.userId && (
+            <Button
+              onPress={() => {
+                if (!ctx.isLoggedIn) {
+                  props.navigation.navigate("login");
+                } else {
+                  ctx.addToCart(
+                    props.route.params.title,
+                    props.route.params.price
+                  );
+                  ToastAndroid.show(
                     "Item added to Cart!",
                     ToastAndroid.SHORT,
                     ToastAndroid.BOTTOM
-                );
-              }
-            }}
-            style={styles.button}
-          >
-            Add to Cart
-          </Button>
+                  );
+                }
+              }}
+              style={styles.button}
+            >
+              Add to Cart
+            </Button>
+          )}
         </VStack>
       </ScrollView>
     </View>

@@ -20,7 +20,6 @@ export default function Profile(props) {
       </View>
       <View style={styles.list}>
         <FlatList
-
           accessible={true}
           data={ctx.items.filter((item) => {
             return item.userId === ctx.id;
@@ -33,10 +32,17 @@ export default function Profile(props) {
               id={item.id}
               photo={item.photo}
               category={item.category}
+              navigation={props.navigation}
             />
           )}
         />
-        <Button style={{}}>Add new</Button>
+        <Button
+          onPress={() => {
+            props.navigation.navigate("inputItem", { input: true });
+          }}
+        >
+          Add new
+        </Button>
       </View>
     </View>
   );
