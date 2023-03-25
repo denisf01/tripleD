@@ -7,6 +7,7 @@ import {
   Icon,
   Menu,
   Divider,
+    Image
 } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
@@ -31,21 +32,16 @@ export default function AppBar(props) {
         w="100%"
         maxW="100%"
       >
-        <HStack alignItems="center">
-          <IconButton onPress={() => {
-              props.navigation.navigate("main")
-          }} icon={<Entypo name="home" size={24} color="white" />} />
-          <Text color="white" fontSize="20" fontWeight="bold">
-            Home
-          </Text>
+        <HStack alignItems="center" space={100}>
+          <IconButton
+            onPress={() => {
+              props.navigation.navigate("main");
+            }}
+            icon={<Entypo name="home" size={24} color="white" />}
+          />
+          <Image size={"sm"} source={require("../images/3dlogo.png") } />
         </HStack>
         <HStack>
-          <IconButton
-            icon={
-              <Icon as={MaterialIcons} name="search" size="xl" color="white" />
-            }
-          />
-
           <Menu
             w="190"
             trigger={(triggerProps) => {

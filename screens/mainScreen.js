@@ -2,53 +2,85 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import { FlatList } from "native-base";
 import AppBar from "../components/AppBar";
 import { MainItem } from "../components/MainItem";
+
+import SearchBar from "../components/SearchBar";
+
 export default function MainScreen(props) {
   let data = [
     {
-      title: "BMW x3",
-      category: "Automobili",
-      img: "https://www.bmwgroup.com/content/dam/grpw/websites/bmwgroup_com/brands/bmw_i/2023/230201_BMW_Group_BMW_i4eDrive40.png",
+      title: "Title1",
+      category: "Cat1",
       description:
-        "The BMW X3 has 1 Diesel Engine and 1 Petrol Engine on offer. The Diesel engine is 1995 cc while the Petrol engine is 1998 cc . It is available with Automatic transmission.Depending upon the variant and fuel type the X3 has a mileage of 13.17 to 16.55 kmpl . The X3 is a 5 seater 4 cylinder car and has length of 4708mm, width of 2138mm and a wheelbase of 2864mm.",
-      seller: "Dino",
+        "Bengaluru (also called Bangalore) is the center of India's" +
+        "              high-tech industry. The city is also known for its parks and" +
+        "              nightlife.",
+      user: "User1",
+      photo: "",
+      id: (Math.random() + 1).toString(36).substring(7),
     },
     {
-      title: "Play Station 5",
-      category: "Konzole",
-      img: "https://d4n0y8dshd77z.cloudfront.net/listings/48316663/lg/img-1678472391-16f08c27fb3d.jpg",
-      description: "",
-      seller: "Didi",
+      title: "Title2",
+      category: "Cat2",
+      description:
+        "Bengaluru (also called Bangalore) is the center of India's" +
+        "              high-tech industry. The city is also known for its parks and" +
+        "              nightlife.",
+      user: "User2",
+      photo: "",
+      id: (Math.random() + 1).toString(36).substring(7),
+    },
+    {
+      title: "Title3",
+      category: "Cat3",
+      description:
+        "Bengaluru (also called Bangalore) is the ter of India's" +
+        "              high-tech indtry. The city is also known for its parks and" +
+        "              nightlife.",
+      user: "User3",
+      photo: "",
+      id: (Math.random() + 1).toString(36).substring(7),
     },
   ];
   return (
     <View style={styles.container}>
       <View style={styles.appbar}>
         <AppBar navigation={props.navigation} />
+        <SearchBar />
       </View>
       <View style={styles.list}>
         <FlatList
           accessible={true}
-          data={[1, 2, 3, 5, 6, 7, 8, 9, 10]}
-          renderItem={({ item }) => <MainItem />}
+          data={data}
+          renderItem={({ item }) => (
+            <MainItem
+              navigation={props.navigation}
+              title={item.title}
+              category={item.category}
+              description={item.description}
+              user={item.user}
+              photo={item.photo}
+              id={item.id}
+            />
+          )}
         />
       </View>
     </View>
   );
 }
-
+//test
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "flex-start",
-    width: "100%",
+    width: "100%", // test
   },
   appbar: {
     alignItems: "center",
     width: "100%",
   },
   list: {
-    marginBottom: 100,
+    marginBottom: 200,
   },
 });
