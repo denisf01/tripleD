@@ -9,6 +9,7 @@ import { ContextProvider } from "./context";
 import { CardTravel } from "@mui/icons-material";
 import Cart from "./screens/Cart";
 import Payment from "./screens/Payment";
+import Profile from "./screens/Profile";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -45,9 +46,14 @@ export default function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="pay"
-                component={Payment}
-                options={{ headerShown: false }}
+              name="pay"
+              component={Payment}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="profile"
+              component={Profile}
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>

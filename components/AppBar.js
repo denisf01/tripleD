@@ -79,7 +79,9 @@ export default function AppBar(props) {
               </Menu.Item>
             ) : (
               <>
-                <Menu.Item>Profile</Menu.Item>
+                <Menu.Item onPress={() => {
+                    props.navigation.navigate("profile")
+                }}>Profile</Menu.Item>
                 <Menu.Item
                   onPress={() => {
                     ctx.logout();

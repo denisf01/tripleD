@@ -107,7 +107,7 @@ export const MainItem = (props) => {
                   }}
                   fontWeight="400"
                 >
-                  {props.user}
+                  User: {props.user}
                 </Text>
               </HStack>
             </HStack>

@@ -8,13 +8,11 @@ import { users_url } from "../constants/constants";
 import { useContext, useEffect, useState } from "react";
 import Context from "../context";
 import { CartItem } from "../components/CartItem";
-export default function Cart(props) {
+import { ProfileItem } from "../components/ProfileItem";
+export default function Profile(props) {
   const ctx = useContext(Context);
+  const [search, setSearch] = useState("");
 
-  let total = 0;
-  for (let i of ctx.user.cart) {
-    total += i.price;
-  }
   return (
     <View style={styles.container}>
       <View style={styles.appbar}>
@@ -22,22 +20,23 @@ export default function Cart(props) {
       </View>
       <View style={styles.list}>
         <FlatList
+
           accessible={true}
-          data={ctx.user.cart ? ctx.user.cart : []}
+          data={ctx.items.filter((item) => {
+            return item.userId === ctx.id;
+          })}
           renderItem={({ item }) => (
-            <CartItem title={item.title} price={item.price} id={item.id} />
+            <ProfileItem
+              description={item.description}
+              title={item.title}
+              price={item.price}
+              id={item.id}
+              photo={item.photo}
+              category={item.category}
+            />
           )}
         />
-        <VStack space={4}>
-          <Text style={styles.text}>Total amount: ${total.toFixed(2)}</Text>
-          <Button
-            onPress={() => {
-              props.navigation.navigate("pay");
-            }}
-          >
-            Order
-          </Button>
-        </VStack>
+        <Button style={{}}>Add new</Button>
       </View>
     </View>
   );

@@ -1,19 +1,23 @@
 import { StatusBar } from "expo-status-bar";
 import {
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    Image,
-    ImageBackground, ToastAndroid,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Image,
+  ImageBackground,
+  ToastAndroid,
 } from "react-native";
 import { Button, Box, NativeBaseProvider } from "native-base";
+import { useContext } from "react";
+import Context from "../context";
 
 const image = {
   uri: "https://media.istockphoto.com/id/1203763961/photo/stacked-credit-cards.jpg?s=612x612&w=0&k=20&c=bEEGZwG120WKDClhmltyAtP0kPMzNir49P4JO3pcies=",
 };
 
 export default function Payment(props) {
+  const ctx = useContext(Context);
   return (
     <NativeBaseProvider>
       <View style={styles.container}>
@@ -25,14 +29,22 @@ export default function Payment(props) {
           <TextInput style={styles.textInput} />
           <Text style={styles.text}>* Cardholder Name:</Text>
           <TextInput style={styles.textInput} />
-          <Button onPress={() => {
+          <Button
+            onPress={() => {
               ToastAndroid.show(
-                  "Thank you for your order!",
-                  ToastAndroid.SHORT,
-                  ToastAndroid.BOTTOM
+                "Thank you for your order!",
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
               );
-              props.navigation.navigate("main")
-          }}>Submit</Button>
+              props.navigation.navigate("main");
+              for (let i of ctx.user.cart) {
+                console.log(i.id);
+                ctx.deleteCartItem(i.id);
+              }
+            }}
+          >
+            Submit
+          </Button>
         </ImageBackground>
       </View>
     </NativeBaseProvider>

@@ -20,6 +20,7 @@ const Context = React.createContext({
   cart: [],
   addToCart: (title, price) => {},
   deleteCartItem: (cartId) => {},
+  deleteProfileItem: (itemId) => {},
 });
 
 export const ContextProvider = (props) => {
@@ -28,7 +29,6 @@ export const ContextProvider = (props) => {
     cart: [],
   });
   const [items, setItems] = useState(null);
-  const [cart, setCart] = useState([]);
 
   const [token, setToken] = useState(null);
   const [id, setId] = useState(null);
@@ -57,6 +57,17 @@ export const ContextProvider = (props) => {
     });
     axios.delete(users_url + `${id}/cart/${cartId}.json`);
   };
+
+  const deleteProfileItem = (itemId) => {
+    setItems((prevState) => {
+      let newState = prevState.filter((item) => {
+        return item.id !== itemId;
+      });
+      return [...newState];
+    });
+    // axios.delete(users_url + `items/${itemId}.json`);
+  };
+
   const addToCartHandler = (title, price) => {
     setUser((prevState) => {
       let newState = { ...prevState };
@@ -85,7 +96,7 @@ export const ContextProvider = (props) => {
           if (!!response.data) {
             setUser({
               userName: response.data.userName,
-              cart: response.data.cart,
+              cart: response.data.cart ? response.data.cart : [],
             });
           }
         })
@@ -156,6 +167,7 @@ export const ContextProvider = (props) => {
     items,
     addToCart: addToCartHandler,
     deleteCartItem: deleteCartItemHandler,
+    deleteProfileItem: deleteProfileItem,
   };
 
   return (
