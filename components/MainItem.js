@@ -96,6 +96,7 @@ export const MainItem = (props) => {
               </Text>
             </Stack>
             <Text fontWeight="400">{props.description}</Text>
+            <Text fontWeight="600">Price ${props.price}</Text>
             <HStack
               alignItems="center"
               space={4}
