@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import { FlatList } from "native-base";
 import AppBar from "../components/AppBar";
 import { MainItem } from "../components/MainItem";
-export default function MainScreen() {
+export default function MainScreen(props) {
   let data = [
     {
       title: "BMW x3",
