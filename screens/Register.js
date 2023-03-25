@@ -18,7 +18,7 @@ import {
 } from "native-base";
 import { signUp_url } from "../constants/constants";
 import { useContext, useState } from "react";
-import { View } from "react-native";
+import { ToastAndroid, View } from "react-native";
 import AppBar from "../components/AppBar";
 import { StyleSheet } from "react-native";
 import axios from "axios";
@@ -112,7 +112,12 @@ const Register = (props) => {
           userName: userName,
         });
         ctx.login(response.data.idToken, response.data.localId);
-        console.log(ctx.isLoggedIn);
+        props.navigation.navigate("main");
+        ToastAndroid.show(
+          "Registered successfully!",
+          ToastAndroid.SHORT,
+          ToastAndroid.BOTTOM
+        );
       })
       .catch(function (error) {
         setError((prevState) => {

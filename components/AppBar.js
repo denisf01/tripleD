@@ -9,7 +9,9 @@ import {
   Divider,
   Image,
 } from "native-base";
+import { ToastAndroid } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+
 import { Entypo } from "@expo/vector-icons";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Pressable } from "native-base";
@@ -48,6 +50,14 @@ export default function AppBar(props) {
           />
         </HStack>
         <HStack>
+          {ctx.isLoggedIn && (
+            <IconButton
+              onPress={() => {
+                props.navigation.navigate("cart");
+              }}
+              icon={<AntDesign name="shoppingcart" size={24} color="white" />}
+            />
+          )}
           <Menu
             w="190"
             trigger={(triggerProps) => {
@@ -70,7 +80,19 @@ export default function AppBar(props) {
             ) : (
               <>
                 <Menu.Item>Profile</Menu.Item>
-                <Menu.Item>Logout</Menu.Item>
+                <Menu.Item
+                  onPress={() => {
+                    ctx.logout();
+                    props.navigation.navigate("main");
+                    ToastAndroid.show(
+                      "Logged out!",
+                      ToastAndroid.SHORT,
+                      ToastAndroid.BOTTOM
+                    );
+                  }}
+                >
+                  Logout
+                </Menu.Item>
               </>
             )}
           </Menu>

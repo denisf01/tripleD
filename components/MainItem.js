@@ -23,6 +23,7 @@ export const MainItem = (props) => {
           id: props.id,
           user: props.user,
           price: props.price,
+          title: props.title,
         });
       }}
     >
@@ -50,7 +51,7 @@ export const MainItem = (props) => {
               <Image
                 width={"100%"}
                 height={"100%"}
-                source={{uri: props.photo[0]}}
+                source={{ uri: props.photo[0] }}
                 alt="image"
               />
             </AspectRatio>

@@ -17,9 +17,12 @@ import {
 import { ScrollView } from "native-base";
 import Slideshow from "react-native-image-slider-show";
 import AppBar from "../components/AppBar";
-import { StyleSheet, View } from "react-native";
+import {StyleSheet, ToastAndroid, View} from "react-native";
+import { useContext } from "react";
+import Context from "../context";
 
 const MainItemDetail = (props) => {
+  const ctx = useContext(Context);
   return (
     <View style={styles.main}>
       <AppBar navigation={props.navigation} />
@@ -122,7 +125,26 @@ const MainItemDetail = (props) => {
             </Box>
           </Box>
 
-          <Button style={styles.button}>Add to Cart</Button>
+          <Button
+            onPress={() => {
+              if (!ctx.isLoggedIn) {
+                props.navigation.navigate("login");
+              } else {
+                ctx.addToCart(
+                  props.route.params.title,
+                  props.route.params.price
+                );
+                ToastAndroid.show(
+                    "Item added to Cart!",
+                    ToastAndroid.SHORT,
+                    ToastAndroid.BOTTOM
+                );
+              }
+            }}
+            style={styles.button}
+          >
+            Add to Cart
+          </Button>
         </VStack>
       </ScrollView>
     </View>

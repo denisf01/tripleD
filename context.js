@@ -17,13 +17,18 @@ const Context = React.createContext({
   isLoggedOut: false,
   user: [],
   items: [],
+  cart: [],
+  addToCart: (title, price) => {},
+  deleteCartItem: (cartId) => {},
 });
 
 export const ContextProvider = (props) => {
   const [user, setUser] = useState({
     userName: null,
+    cart: [],
   });
   const [items, setItems] = useState(null);
+  const [cart, setCart] = useState([]);
 
   const [token, setToken] = useState(null);
   const [id, setId] = useState(null);
@@ -40,11 +45,39 @@ export const ContextProvider = (props) => {
     console.log("test2");
     setId(id);
   };
+  const deleteCartItemHandler = (cartId) => {
+    setUser((prevState) => {
+      let newState = {
+        ...prevState,
+        cart: prevState.cart.filter((item) => {
+          return item.id !== cartId;
+        }),
+      };
+      return { ...newState };
+    });
+    axios.delete(users_url + `${id}/cart/${cartId}.json`);
+  };
+  const addToCartHandler = (title, price) => {
+    setUser((prevState) => {
+      let newState = { ...prevState };
+      const idCart = (Math.random() + 1).toString(36).substring(7);
+      newState.cart = [
+        ...newState.cart,
+        { id: idCart, title: title, price: price },
+      ];
+      axios
+        .put(users_url + `${id}/cart/${idCart}.json`, {
+          title: title,
+          price: price,
+        })
+        .then()
+        .catch();
+      return { ...newState };
+    });
+  };
 
   useEffect(() => {
     if (!!isLoggedIn) {
-
-
       axios
         .get(users_url + id + ".json")
         .then(function (response) {
@@ -52,6 +85,32 @@ export const ContextProvider = (props) => {
           if (!!response.data) {
             setUser({
               userName: response.data.userName,
+              cart: response.data.cart,
+            });
+          }
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        });
+
+      axios
+        .get(users_url + id + "/cart.json")
+        .then(function (response) {
+          // handle success
+          if (!!response.data) {
+            const initialCart = Object.keys(response.data).map((id) => {
+              return {
+                id,
+                title: response.data[id].title,
+                price: response.data[id].price,
+              };
+            });
+
+            setUser((prevState) => {
+              let newState = { ...prevState };
+              newState.cart = [...initialCart];
+              return { ...newState };
             });
           }
         })
@@ -61,30 +120,30 @@ export const ContextProvider = (props) => {
         });
     }
     axios
-        .get(items_url)
-        .then(function (response) {
-          // handle success
-          if (!!response.data) {
-            const initialItems = Object.keys(response.data).map((id) => {
-              return {
-                id,
-                category: response.data[id].category,
-                description: response.data[id].description,
-                photo: response.data[id].photo,
-                price: response.data[id].price,
-                title: response.data[id].title,
-                user: response.data[id].user,
-                userId: response.data[id].userId,
-              };
-            });
+      .get(items_url)
+      .then(function (response) {
+        // handle success
+        if (!!response.data) {
+          const initialItems = Object.keys(response.data).map((id) => {
+            return {
+              id,
+              category: response.data[id].category,
+              description: response.data[id].description,
+              photo: response.data[id].photo,
+              price: response.data[id].price,
+              title: response.data[id].title,
+              user: response.data[id].user,
+              userId: response.data[id].userId,
+            };
+          });
 
-            setItems(initialItems);
-          }
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        });
+          setItems(initialItems);
+        }
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
   }, [id, isLoggedIn]);
 
   const contextValue = {
@@ -95,6 +154,8 @@ export const ContextProvider = (props) => {
     logout: logoutHandler,
     user,
     items,
+    addToCart: addToCartHandler,
+    deleteCartItem: deleteCartItemHandler,
   };
 
   return (

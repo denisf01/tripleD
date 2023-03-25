@@ -16,7 +16,7 @@ import {
   FormControl,
   Pressable,
 } from "native-base";
-import { View } from "react-native";
+import {ToastAndroid, View} from "react-native";
 import AppBar from "../components/AppBar";
 import { StyleSheet } from "react-native";
 import { useContext, useState } from "react";
@@ -75,7 +75,12 @@ const Login = (props) => {
         setError(null);
 
         ctx.login(response.data.idToken, response.data.localId);
-        console.log("test");
+        props.navigation.navigate("main")
+        ToastAndroid.show(
+            "Logged in successfully!",
+            ToastAndroid.SHORT,
+            ToastAndroid.BOTTOM
+        );
       })
       .catch(function (error) {
         setError((prevState) => {
