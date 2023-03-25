@@ -17,7 +17,12 @@ export const MainItem = (props) => {
   return (
     <Pressable
       onPress={() => {
-        props.navigation.navigate("itemDetails", {id: props.id});
+        props.navigation.navigate("itemDetails", {
+          category: props.category,
+          description: props.description,
+          id: props.id,
+          user: props.user
+        });
       }}
     >
       <Box alignItems="center" padding={2}>

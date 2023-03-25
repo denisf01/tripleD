@@ -58,6 +58,7 @@ export default function MainScreen(props) {
               user={item.user}
               photo={item.photo}
               id={item.id}
+
             />
           )}
         />
