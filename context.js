@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import { users_url } from "./constants/constants";
+import { items_url, users_url } from "./constants/constants";
 import {
   calculateRemainingTime,
   retrieveStoredToken,
@@ -16,12 +16,14 @@ const Context = React.createContext({
   logout: () => {},
   isLoggedOut: false,
   user: [],
+  items: [],
 });
 
 export const ContextProvider = (props) => {
   const [user, setUser] = useState({
     userName: null,
   });
+  const [items, setItems] = useState(null);
 
   const [token, setToken] = useState(null);
   const [id, setId] = useState(null);
@@ -41,22 +43,7 @@ export const ContextProvider = (props) => {
 
   useEffect(() => {
     if (!!isLoggedIn) {
-      // axios
-      //     .get(users_url + userId + "/exercises.json")
-      //     .then(function (response) {
-      //       // handle success
-      //       if (!!response.data) {
-      //         const initialExercises = Object.keys(response.data).map((id) => {
-      //           return { id, name: response.data[id].name };
-      //         });
-      //
-      //         setExercises(initialExercises);
-      //       }
-      //     })
-      //     .catch(function (error) {
-      //       // handle error
-      //       console.log(error);
-      //     });
+
 
       axios
         .get(users_url + id + ".json")
@@ -73,6 +60,31 @@ export const ContextProvider = (props) => {
           console.log(error);
         });
     }
+    axios
+        .get(items_url)
+        .then(function (response) {
+          // handle success
+          if (!!response.data) {
+            const initialItems = Object.keys(response.data).map((id) => {
+              return {
+                id,
+                category: response.data[id].category,
+                description: response.data[id].description,
+                photo: response.data[id].photo,
+                price: response.data[id].price,
+                title: response.data[id].title,
+                user: response.data[id].user,
+                userId: response.data[id].userId,
+              };
+            });
+
+            setItems(initialItems);
+          }
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        });
   }, [id, isLoggedIn]);
 
   const contextValue = {
@@ -82,6 +94,7 @@ export const ContextProvider = (props) => {
     login: loginHandler,
     logout: logoutHandler,
     user,
+    items,
   };
 
   return (

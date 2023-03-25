@@ -6,3 +6,4 @@ export const signUp_url =
 export const signIn_url =
   "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
   API_KEY;
+export const items_url = "https://tripled-e3a40-default-rtdb.europe-west1.firebasedatabase.app/items.json"
