@@ -5,6 +5,7 @@ import {
   calculateRemainingTime,
   retrieveStoredToken,
 } from "./constants/functions";
+import { myImages } from "./constants/constants";
 
 let logoutTimer;
 
@@ -21,6 +22,8 @@ const Context = React.createContext({
   addToCart: (title, price) => {},
   deleteCartItem: (cartId) => {},
   deleteProfileItem: (itemId) => {},
+  addItem: (data) => {},
+  editItem: (data, itemId) => {},
 });
 
 export const ContextProvider = (props) => {
@@ -65,7 +68,9 @@ export const ContextProvider = (props) => {
       });
       return [...newState];
     });
-    // axios.delete(users_url + `items/${itemId}.json`);
+    axios.delete(
+      `https://tripled-e3a40-default-rtdb.europe-west1.firebasedatabase.app/items/${itemId}.json`
+    );
   };
 
   const addToCartHandler = (title, price) => {
@@ -74,16 +79,99 @@ export const ContextProvider = (props) => {
       const idCart = (Math.random() + 1).toString(36).substring(7);
       newState.cart = [
         ...newState.cart,
-        { id: idCart, title: title, price: price },
+        { id: idCart, title: title, price: +price },
       ];
       axios
         .put(users_url + `${id}/cart/${idCart}.json`, {
           title: title,
-          price: price,
+          price: +price,
         })
         .then()
         .catch();
       return { ...newState };
+    });
+  };
+
+  const addItemHandler = (data) => {
+    const itemId = (Math.random() + 1).toString(36).substring(7);
+    const photo = myImages[Math.floor(Math.random() * myImages.length)];
+    axios
+      .put(
+        "https://tripled-e3a40-default-rtdb.europe-west1.firebasedatabase.app/items/" +
+          itemId +
+          ".json",
+        {
+          category: data.category,
+          description: data.description,
+          photo: [photo],
+          price: data.price,
+          title: data.title,
+          user: user.userName,
+          userId: id,
+        }
+      )
+      .then()
+      .catch();
+    setItems((prevState) => {
+      return [
+        ...prevState,
+        {
+          id: itemId,
+          category: data.category,
+          description: data.description,
+          photo: [photo],
+          price: data.price,
+          title: data.title,
+          user: user.userName,
+          userId: id,
+        },
+      ];
+    });
+  };
+
+  const editItemHandler = (data, itemId) => {
+    setItems((prevState) => {
+      let oldItem = {
+        ...prevState[
+          prevState.findIndex((item) => {
+            return item.id === itemId;
+          })
+        ],
+      };
+      let newItem = {
+        ...oldItem,
+        category: data.category,
+        description: data.description,
+        price: data.price,
+        title: data.title,
+      };
+      axios.delete(
+        `https://tripled-e3a40-default-rtdb.europe-west1.firebasedatabase.app/items/${itemId}.json`
+      );
+      axios
+        .put(
+          "https://tripled-e3a40-default-rtdb.europe-west1.firebasedatabase.app/items/" +
+            itemId +
+            ".json",
+          {
+            category: data.category,
+            description: data.description,
+            photo: oldItem.photo,
+            price: data.price,
+            title: data.title,
+            user: oldItem.user,
+            userId: oldItem.userId,
+          }
+        )
+        .then()
+        .catch();
+
+      return [
+        ...items.filter((item) => {
+          return item.id !== itemId;
+        }),
+        newItem,
+      ];
     });
   };
 
@@ -114,13 +202,14 @@ export const ContextProvider = (props) => {
               return {
                 id,
                 title: response.data[id].title,
-                price: response.data[id].price,
+                price: +response.data[id].price,
               };
             });
 
             setUser((prevState) => {
               let newState = { ...prevState };
               newState.cart = [...initialCart];
+
               return { ...newState };
             });
           }
@@ -168,6 +257,8 @@ export const ContextProvider = (props) => {
     addToCart: addToCartHandler,
     deleteCartItem: deleteCartItemHandler,
     deleteProfileItem: deleteProfileItem,
+    addItem: addItemHandler,
+    editItem: editItemHandler,
   };
 
   return (

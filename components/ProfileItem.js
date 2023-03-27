@@ -83,21 +83,31 @@ export const ProfileItem = (props) => {
               ml="-0.5"
               mt="-1"
             >
-              The Silicon Valley of India.
+              {props.category}
             </Text>
           </Stack>
           <Text fontWeight="400">{props.description}</Text>
+          <Text fontWeight="600">Price: ${props.price}</Text>
           <HStack alignItems="center" space={4} justifyContent="space-between">
             <HStack alignItems="center"></HStack>
           </HStack>
         </Stack>
         <HStack style={styles.buttons}>
-          <IconButton onPress={() => {
-            ctx.deleteProfileItem(props.id)
-          }}>
+          <IconButton
+            onPress={() => {
+              ctx.deleteProfileItem(props.id);
+            }}
+          >
             <AntDesign name="delete" size={20} color="black" />
           </IconButton>
-          <IconButton>
+          <IconButton
+            onPress={() => {
+              props.navigation.navigate("inputItem", {
+                input: false,
+                itemId: props.id,
+              });
+            }}
+          >
             <AntDesign name="edit" size={20} color="black" />
           </IconButton>
         </HStack>

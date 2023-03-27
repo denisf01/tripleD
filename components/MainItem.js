@@ -24,6 +24,8 @@ export const MainItem = (props) => {
           user: props.user,
           price: props.price,
           title: props.title,
+          photo: props.photo,
+          userId: props.userId,
         });
       }}
     >
@@ -90,10 +92,11 @@ export const MainItem = (props) => {
                 ml="-0.5"
                 mt="-1"
               >
-                The Silicon Valley of India.
+                {props.category}
               </Text>
             </Stack>
             <Text fontWeight="400">{props.description}</Text>
+            <Text fontWeight="600">Price ${props.price}</Text>
             <HStack
               alignItems="center"
               space={4}
