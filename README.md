@@ -1,6 +1,6 @@
 # Mobile Web Shop App - React Native
 
-This project is a mobile web shop app created in React Native within 24 hours on a hackathon event. The goal of this app is to provide a seamless shopping experience for users on their mobile devices.
+This project is a mobile web shop app created by team of three (Eldar Vikalo, Dino Marušić, Denis Folvarek) in React Native within 24 hours on a hackathon event. The goal of this app is to provide a seamless shopping experience for users on their mobile devices.
 
 ## Getting Started
 
